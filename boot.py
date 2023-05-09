@@ -15,7 +15,6 @@ display.flip(True)
 display.text('Initializing', 0, 0, 1)
 display.show()
 
-
 wlan = network.WLAN(network.STA_IF); wlan.active(True)
 wlan.scan()                             # Scan for available access points
 wlan.connect(ssid, wifi_password)   # Connect to an AP

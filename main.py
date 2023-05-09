@@ -43,23 +43,30 @@ def connect_and_subscribe():
   return client
 
 
-def restart_and_reconnect():
-  print('Failed to connect to MQTT broker. Reconnecting...')
-  sleep(10)
-  machine.reset()
+def mqtt_reconnect():
+  while True:
+    try:
+      client.connect()
+      print("MQTT reconnected successfully")
+      break
+    except OSError as e:
+      print("MQTT reconnection failed. Retrying in 10 seconds...")
+      time.sleep(10)
 
+
+client = connect_and_subscribe()
 
 while True:
   if wlan.isconnected():
    display.pixel(122, 6, 1)
-   display.wifi_connected_logo(119, 2, 1)
+   display.wifi_connected_logo(1, 1, 1)
   else:
-   display.wifi_disconnected_logo(119, 2, 1)
+   display.wifi_disconnected_logo(1, 1, 1)
   
   try:
-    client = connect_and_subscribe()
+    client.connect()
   except OSError as e:
-    restart_and_reconnect()
+    mqtt_reconnect()
 
   led.value(True)
   sensor.measure()
