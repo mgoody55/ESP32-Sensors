@@ -1,2 +1,2 @@
-# ESP32-Temp-Sensor
-Temperature Sensors using ESP32 and DHT22 running MicroPython
+# ESP32-Sensors
+ESP32 base sensor suite currently using DHT22 running in MicroPython
